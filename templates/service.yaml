@@ -1,0 +1,32 @@
+{{- range .Values.apps }}
+apiVersion: v1
+kind: Service
+metadata:
+#  creationTimestamp: "2026-10-14T20:07:52Z"
+  labels:
+    app: 
+  name: {{ .name }}
+  namespace: jenkins
+#  resourceVersion: "711073"
+#  uid: b137b2bd-c084-4158-96c9-dc82909bdea6
+spec:
+  #clusterIP: 10.43.173.49
+ # clusterIPs:
+  #- 10.43.173.49
+  #externalTrafficPolicy: Cluster
+  #internalTrafficPolicy: Cluster
+  #ipFamilies:
+  #- IPv4
+  #ipFamilyPolicy: SingleStack
+  ports:
+  - name: {{ .name }}
+    nodePort: {{ .nodePort }}
+    port: {{ .containerPort
+    protocol: TCP
+    targetPort: {{ .servicePort }}
+  selector:
+    app: {{ .name }}
+ # sessionAffinity: None
+  type: NodePort
+#status:
+ # loadBalancer: {}
