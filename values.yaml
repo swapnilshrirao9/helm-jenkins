@@ -22,3 +22,12 @@ apps:
 
 service:
   - protocol: TCP
+
+
+sonarqube:
+  enabled: true
+  containerSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 0
+    allowPrivilegeEscalation: false
