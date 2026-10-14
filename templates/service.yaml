@@ -22,7 +22,7 @@ spec:
   - name: {{ .name }}
     nodePort: {{ .nodePort }}
     port: {{ .containerPort
-    protocol: TCP
+    protocol: {{ $.Values.service.protocol }} 
     targetPort: {{ .servicePort }}
   selector:
     app: {{ .name }}
@@ -30,3 +30,5 @@ spec:
   type: NodePort
 #status:
  # loadBalancer: {}
+---
+{{- end }}

@@ -20,3 +20,5 @@ apps:
     image: 192.168.56.114:5000/swapnilsks/admin-jenkins-sonar-nexus-tomcat
     tag: sonar-admin
 
+service:
+  - protocol: TCP
