@@ -33,6 +33,11 @@ spec:
         name: {{ .name }}
         ports:
           - containerPort: {{ .containerPort }} 
+        securityContext:
+            runAsNonRoot: {{ $.Values.sonarqube.containerSecurityContext.runAsNonRoot }}
+            runAsUser: {{ $.Values.sonarqube.containerSecurityContext.runAsUser }}
+            runAsGroup: {{ $.Values.sonarqube.containerSecurityContext.runAsGroup }}
+            allowPrivilegeEscalation: {{ $.Values.sonarqube.containerSecurityContext.allowPrivilegeEscalation }}
 #        resources: {}
 #        terminationMessagePath: /dev/termination-log
 #        terminationMessagePolicy: File

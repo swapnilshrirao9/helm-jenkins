@@ -3,22 +3,22 @@ apps:
     containerPort: 8080
     servicePort: 8080
     nodePort: 31080
-    image: 192.168.56.114:5000/swapnilsks/admin-jenkins-sonar-nexus-tomcat
-    tag: jenkins-admin
+    image: 192.168.56.114:5000/jenkins
+    tag: admin
 
   - name: nexus-admin
     containerPort: 8081
     servicePort: 8081
     nodePort: 31081
-    image: 192.168.56.114:5000/swapnilsks/admin-jenkins-sonar-nexus-tomcat
-    tag: nexus-admin
+    image: 192.168.56.114:5000/nexus
+    tag: admin
 
   - name: sonar-admin
     containerPort: 9000
     servicePort: 9000
     nodePort: 31900
-    image: 192.168.56.114:5000/swapnilsks/admin-jenkins-sonar-nexus-tomcat
-    tag: sonar-admin
+    image: 192.168.56.114:5000/sonar
+    tag: admin
 
 service:
   - protocol: TCP
