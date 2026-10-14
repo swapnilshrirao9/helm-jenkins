@@ -21,8 +21,7 @@ spec:
   ports:
   - name: {{ .name }}
     nodePort: {{ .nodePort }}
-    port: {{ .containerPort
-    protocol: {{ $.Values.service.protocol }} 
+    port: {{ .containerPort }}
     targetPort: {{ .servicePort }}
   selector:
     app: {{ .name }}
