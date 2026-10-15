@@ -53,6 +53,14 @@ persistence:
   storageClassName: automatic
   reclaimPolicy: Retain
 
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 500m
+    memory: 1Gi
+
 service:
   - protocol: TCP
 
