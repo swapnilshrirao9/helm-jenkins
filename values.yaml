@@ -5,11 +5,13 @@ apps:
     nodePort: 31080
     image: 192.168.56.114:5000/jenkins
     tag: admin
+    volumes:
+       size: 2Gi
+       hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/jenkins
     volumeMounts:
       - name: jenkins
         mountPath: /var/jenkins_home/
-        size: 2Gi
-        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/jenkins   
+           
 
   - name: nexus-admin
     containerPort: 8081
@@ -17,11 +19,12 @@ apps:
     nodePort: 31081
     image: 192.168.56.114:5000/nexus
     tag: admin
+    volumes:
+       size: 2Gi
+       hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/nexus
     volumeMounts:
       - name: nexus
         mountPath: /nexus-data
-        size: 2Gi
-        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/nexus
 
   - name: sonar-admin
     containerPort: 9000
@@ -34,11 +37,19 @@ apps:
       runAsUser: 1000
       runAsGroup: 0
       allowPrivilegeEscalation: false
+    volumes:
+       size: 2Gi
+       hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar
     volumeMounts:
-      - name: sonar
+      - name: sonar-data
         mountPath: /opt/sonarqube/
-        size: 2Gi
-        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar
+        subPath: data
+      - name: sonar-logs
+        mountPath: /opt/sonarqube/
+        subPath: logs
+      - name: sonar-extensions
+        mountPath: /opt/sonarqube/
+        subPath: extensions
 
 persistence:
   storageClassName: manual
