@@ -29,6 +29,11 @@ apps:
     nodePort: 31900
     image: 192.168.56.114:5000/sonar
     tag: admin
+    containerSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 0
+      allowPrivilegeEscalation: false
     volumeMounts:
       - name: sonar
         mountPath: /opt/sonarqube/*/*/*
@@ -47,11 +52,3 @@ VolumeMount:
   - name: jenkins-vm
     mountPath: /var/jenkins_home/
 
-
-sonarqube:
-  enabled: true
-  containerSecurityContext:
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 0
-    allowPrivilegeEscalation: false

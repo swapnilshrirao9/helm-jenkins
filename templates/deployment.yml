@@ -31,11 +31,13 @@ spec:
         name: {{ $app.name }}
         ports:
           - containerPort: {{ $app.containerPort }} 
+      {{ - with $app.containerSecurityContext }}
         securityContext:
-            runAsNonRoot: {{ $.Values.sonarqube.containerSecurityContext.runAsNonRoot }}
-            runAsUser: {{ $.Values.sonarqube.containerSecurityContext.runAsUser }}
-            runAsGroup: {{ $.Values.sonarqube.containerSecurityContext.runAsGroup }}
-            allowPrivilegeEscalation: {{ $.Values.sonarqube.containerSecurityContext.allowPrivilegeEscalation }}
+            runAsNonRoot: {{ .runAsNonRoot }}
+            runAsUser: {{ .runAsUser }}
+            runAsGroup: {{ .runAsGroup }}
+            allowPrivilegeEscalation: {{ .allowPrivilegeEscalation }}
+            {{- end }}
         volumeMounts:
 {{ range $volumeMount := $app.volumeMounts }}
           - mountPath: {{ $volumeMount.mountPath }}
