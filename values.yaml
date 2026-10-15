@@ -38,12 +38,22 @@ apps:
       runAsGroup: 0
       allowPrivilegeEscalation: false
     volumes:
-       size: 2Gi
-       hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar
-
+      - name: sonar-data
+        size: 2Gi
+        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar/data
+      - name: sonar-logs
+        size: 2Gi
+        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar/logs
+      - name: sonar-extensions
+        size: 2Gi
+        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar/extensions
     volumeMounts:
       - name: sonar-data
         mountPath: /opt/sonarqube/data
+      - name: sonar-logs
+        mountPath: /opt/sonarqube/logs
+      - name: sonar-extensions
+        mountPath: /opt/sonarqube/extensions
      # - name: sonar-logs
      #   mountPath: /opt/sonarqube/logs
      # - name: sonar-extensions

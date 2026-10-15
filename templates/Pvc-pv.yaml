@@ -1,27 +1,12 @@
 {{- range $app := .Values.apps }}
-{{- range $volumeMount := $app.volumeMounts }}
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ printf "%s-%s" $app.name $volumeMount.name | quote }}
-  namespace: jenkins
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: {{ $.Values.persistence.storageClassName }}
-  volumeName: {{ $app.name }}-pv
-  resources:
-    requests:
-      storage: {{ $app.volumes.size }}
----
+{{- range $volume := $app.volumes }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ $app.name }}-pv
-  namespace: jenkins
+  name: {{ printf "%s-%s-pv" $app.name $volume.name | quote }}
 spec:
   capacity:
-    storage: {{ $app.volumes.size }}
+    storage: {{ $volume.size }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: {{ $.Values.persistence.reclaimPolicy }}
@@ -30,8 +15,22 @@ spec:
     - nfsvers=4.1
     - proto=tcp
   nfs:
-    path: {{ $app.volumes.hostPath | quote }}   # The exact path exported on your master node
+    path: {{ $volume.hostPath | quote }}
     server: 192.168.56.102
-{{ end }}
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ printf "%s-%s" $app.name $volume.name | quote }}
+  namespace: jenkins
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ $.Values.persistence.storageClassName }}
+  volumeName: {{ printf "%s-%s-pv" $app.name $volume.name | quote }}
+  resources:
+    requests:
+      storage: {{ $volume.size }}
+---
+{{- end }}
 {{- end }}
