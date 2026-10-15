@@ -27,7 +27,7 @@ spec:
   persistentVolumeReclaimPolicy: {{ $.Values.persistence.reclaimPolicy }}
   storageClassName: {{ $.Values.persistence.storageClassName }}
   nfs:
-    path: {{ $volumeMount.hostsPath }}    # The exact path exported on your master node
+    path: {{ $volumeMount.hostsPath | quote }}    # The exact path exported on your master node
     server: 192.168.56.102
 {{ end }}
 ---
