@@ -1,5 +1,4 @@
 {{- range $app := .Values.apps }}
-{{- range $volume := $app.volumes }}
 {{- range $volumeMount := $app.volumeMounts }}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -13,7 +12,7 @@ spec:
   volumeName: {{ $app.name }}-pv
   resources:
     requests:
-      storage: {{ $volume.size }}
+      storage: {{ $app.volumes.size }}
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -22,7 +21,7 @@ metadata:
   namespace: jenkins
 spec:
   capacity:
-    storage: {{ $volume.size }}
+    storage: {{ $app.volumes.size }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: {{ $.Values.persistence.reclaimPolicy }}
@@ -31,8 +30,7 @@ spec:
     - nfsvers=4.1
     - proto=tcp
   nfs:
-    path: {{ $volume.hostPath | quote }} 
-    {{ end }}   # The exact path exported on your master node
+    path: {{ $app.volumes.hostPath | quote }}   # The exact path exported on your master node
     server: 192.168.56.102
 {{ end }}
 ---
