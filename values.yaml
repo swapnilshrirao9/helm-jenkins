@@ -31,12 +31,12 @@ apps:
     tag: admin
     containerSecurityContext:
       runAsNonRoot: true
-      runAsUser: 1000
+      runAsUser: sonarqube
       runAsGroup: 0
       allowPrivilegeEscalation: false
     volumeMounts:
       - name: sonar
-        mountPath: /opt/sonarqube/*/*/*
+        mountPath: /opt/sonarqube/
         size: 2Gi
         hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar
 
