@@ -21,7 +21,7 @@ apps:
       - name: nexus
         mountPath: /nexus-data
         size: 2Gi
-        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/nexus-data
+        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/nexus
 
   - name: sonar-admin
     containerPort: 9000
