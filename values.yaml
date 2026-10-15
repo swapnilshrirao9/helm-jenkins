@@ -50,7 +50,7 @@ apps:
         mountPath: /opt/sonarqube/extensions
 
 persistence:
-  storageClassName: manual
+  storageClassName: automatic
   reclaimPolicy: Retain
 
 service:
