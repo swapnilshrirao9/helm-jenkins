@@ -31,7 +31,7 @@ apps:
     tag: admin
     containerSecurityContext:
       runAsNonRoot: true
-      runAsUser: sonarqube
+      runAsUser: 1000
       runAsGroup: 0
       allowPrivilegeEscalation: false
     volumeMounts:
