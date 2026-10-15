@@ -31,13 +31,13 @@ spec:
         name: {{ $app.name }}
         ports:
           - containerPort: {{ $app.containerPort }} 
-      {{ - with $app.containerSecurityContext }}
+      {{ with $app.containerSecurityContext }}
         securityContext:
             runAsNonRoot: {{ .runAsNonRoot }}
             runAsUser: {{ .runAsUser }}
             runAsGroup: {{ .runAsGroup }}
             allowPrivilegeEscalation: {{ .allowPrivilegeEscalation }}
-            {{- end }}
+            {{ end }}
         volumeMounts:
 {{ range $volumeMount := $app.volumeMounts }}
           - mountPath: {{ $volumeMount.mountPath }}
