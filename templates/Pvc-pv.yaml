@@ -26,6 +26,9 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: {{ $.Values.persistence.reclaimPolicy }}
   storageClassName: {{ $.Values.persistence.storageClassName }}
+  mountOptions:
+    - nfsvers=4.1
+    - proto=tcp
   nfs:
     path: {{ $volumeMount.hostPath | quote }}    # The exact path exported on your master node
     server: 192.168.56.102
