@@ -5,6 +5,11 @@ apps:
     nodePort: 31080
     image: 192.168.56.114:5000/jenkins
     tag: admin
+    volumeMounts:
+      - name: jenkins
+        mountPath: /var/jenkins_home/
+        size: 2Gi
+        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/jenkins   
 
   - name: nexus-admin
     containerPort: 8081
@@ -12,6 +17,11 @@ apps:
     nodePort: 31081
     image: 192.168.56.114:5000/nexus
     tag: admin
+    volumeMounts:
+      - name: nexus
+        mountPath: /nexus-data
+        size: 2Gi
+        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/nexus
 
   - name: sonar-admin
     containerPort: 9000
@@ -19,9 +29,23 @@ apps:
     nodePort: 31900
     image: 192.168.56.114:5000/sonar
     tag: admin
+    volumeMounts:
+      - name: sonar
+        mountPath: /opt/sonarqube/*/*/*
+        size: 2Gi
+        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar
+
+persistence:
+  storageClassName: manual
+  reclaimPolicy: Retain
 
 service:
   - protocol: TCP
+
+
+VolumeMount:
+  - name: jenkins-vm
+    mountPath: /var/jenkins_home/
 
 
 sonarqube:

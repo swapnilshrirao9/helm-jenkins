@@ -1,22 +1,20 @@
-{{- range .Values.apps }}
+
+{{- range $app := .Values.apps }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-#  creationTimestamp: "2026-10-14T18:47:07Z"
   generation: 1
   labels:
-    app: {{ .name }}
-  name: {{ .name }}
+    app: {{ $app.name }}
+  name: {{ $app.name }}
   namespace: jenkins
-#  resourceVersion: "706387"
-#  uid: dbcbe3ed-1719-4d21-8eed-945342afad61
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: {{ .name }}
+      app: {{ $app.name }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -25,19 +23,29 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .name }}
+        app: {{ $app.name }}
     spec:
       containers:
-      - image: {{ .image }}:{{ .tag }}
+      - image: {{ $app.image }}:{{ $app.tag }}
         imagePullPolicy: Always
-        name: {{ .name }}
+        name: {{ $app.name }}
         ports:
-          - containerPort: {{ .containerPort }} 
+          - containerPort: {{ $app.containerPort }} 
         securityContext:
             runAsNonRoot: {{ $.Values.sonarqube.containerSecurityContext.runAsNonRoot }}
             runAsUser: {{ $.Values.sonarqube.containerSecurityContext.runAsUser }}
             runAsGroup: {{ $.Values.sonarqube.containerSecurityContext.runAsGroup }}
             allowPrivilegeEscalation: {{ $.Values.sonarqube.containerSecurityContext.allowPrivilegeEscalation }}
+        volumeMounts:
+{{ range $volumeMount := $app.volumeMounts }}
+          - mountPath: {{ $volumeMount.mountPath }}
+            name: {{ $volumeMount.name }}
+{{ end }}
+      volumes:
+{{ range $volumeMount := $app.volumeMounts }}
+      - name: {{ $volumeMount.name }}
+        persistentVolumeClaim:
+          claimName: {{ printf "%s-%s" $app.name $volumeMount.name | quote }}
 #        resources: {}
 #        terminationMessagePath: /dev/termination-log
 #        terminationMessagePolicy: File
@@ -47,5 +55,6 @@ spec:
  #     securityContext: {}
 #      terminationGracePeriodSeconds: 30
 #status: {}
+{{ end }}
 ---
 {{- end }}
