@@ -40,16 +40,14 @@ apps:
     volumes:
        size: 2Gi
        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/sonar
+
     volumeMounts:
       - name: sonar-data
-        mountPath: /opt/sonarqube/
-        subPath: data
+        mountPath: /opt/sonarqube/data
       - name: sonar-logs
-        mountPath: /opt/sonarqube/
-        subPath: logs
+        mountPath: /opt/sonarqube/logs
       - name: sonar-extensions
-        mountPath: /opt/sonarqube/
-        subPath: extensions
+        mountPath: /opt/sonarqube/extensions
 
 persistence:
   storageClassName: manual
