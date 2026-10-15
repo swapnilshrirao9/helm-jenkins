@@ -44,10 +44,10 @@ apps:
     volumeMounts:
       - name: sonar-data
         mountPath: /opt/sonarqube/data
-      - name: sonar-logs
-        mountPath: /opt/sonarqube/logs
-      - name: sonar-extensions
-        mountPath: /opt/sonarqube/extensions
+     # - name: sonar-logs
+     #   mountPath: /opt/sonarqube/logs
+     # - name: sonar-extensions
+      #  mountPath: /opt/sonarqube/extensions
 
 persistence:
   storageClassName: automatic
