@@ -32,8 +32,8 @@ apps:
     containerPort: 9000
     servicePort: 9000
     nodePort: 31900
-    image: 192.168.56.114:5000/sonar
-    tag: admin
+    image: 192.168.56.114:5000/swapnilsks/sonartest
+    tag: latest
     containerSecurityContext:
       runAsNonRoot: true
       runAsUser: 1000
@@ -70,7 +70,7 @@ resources:
     cpu: 500m
     memory: 1Gi
   limits:
-    cpu: 500m
+    cpu: 2000m
     memory: 5Gi
 
 service:
