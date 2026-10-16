@@ -3,8 +3,8 @@ apps:
     containerPort: 8080
     servicePort: 8080
     nodePort: 31080
-    image: 192.168.56.114:5000/jenkins
-    tag: admin
+    image: jenkins/jenkins
+    tag: lts-jdk21
     volumes:
       - name: jenkins-volume
         size: 2Gi
