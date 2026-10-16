@@ -8,7 +8,8 @@ apps:
     containerSecurityContext:
       runAsNonRoot: true
       runAsUser: 1000
-      runAsGroup: 0
+      runAsGroup: 1000
+      fsGroup: 1000
       allowPrivilegeEscalation: false
     volumes:
       - name: jenkins-volume
@@ -42,7 +43,8 @@ apps:
     containerSecurityContext:
       runAsNonRoot: true
       runAsUser: 1000
-      runAsGroup: 0
+      runAsGroup: 1000
+      fsGroup: 1000
       allowPrivilegeEscalation: false
     volumes:
       - name: sonar-data

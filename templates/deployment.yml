@@ -45,6 +45,7 @@ spec:
             runAsNonRoot: {{ .runAsNonRoot }}
             runAsUser: {{ .runAsUser }}
             runAsGroup: {{ .runAsGroup }}
+            fsGroup: {{ .fsGroup }}
             allowPrivilegeEscalation: {{ .allowPrivilegeEscalation }}
             {{ end }}
         volumeMounts:
