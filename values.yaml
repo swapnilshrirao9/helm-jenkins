@@ -6,6 +6,7 @@ apps:
     image: 192.168.56.114:5000/jenkins
     tag: admin
     volumes:
+       name: jenkins-volume
        size: 2Gi
        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/jenkins
     volumeMounts:
@@ -20,6 +21,7 @@ apps:
     image: 192.168.56.114:5000/nexus
     tag: admin
     volumes:
+       name: nexus-volume
        size: 2Gi
        hostPath: /home/jenkins/helm-jenkins-sonar-nexus-data/nexus
     volumeMounts:
