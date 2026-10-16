@@ -5,6 +5,11 @@ apps:
     nodePort: 31080
     image: jenkins/jenkins
     tag: lts-jdk21
+    containerSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 0
+      allowPrivilegeEscalation: false
     volumes:
       - name: jenkins-volume
         size: 2Gi
