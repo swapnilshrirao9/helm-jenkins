@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - image: {{ $app.image }}:{{ $app.tag }}
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: {{ $app.name }}
         ports:
           - containerPort: {{ $app.containerPort }}
