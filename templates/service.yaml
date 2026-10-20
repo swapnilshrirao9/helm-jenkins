@@ -1,11 +1,11 @@
-{{- range .Values.apps }}
+{{- range $app := .Values.apps }}
 apiVersion: v1
 kind: Service
 metadata:
 #  creationTimestamp: "2026-10-14T20:07:52Z"
   labels:
-    app: 
-  name: {{ .name }}
+    app:
+  name: {{ $app.name }}
   namespace: jenkins
 #  resourceVersion: "711073"
 #  uid: b137b2bd-c084-4158-96c9-dc82909bdea6
@@ -19,12 +19,12 @@ spec:
   #- IPv4
   #ipFamilyPolicy: SingleStack
   ports:
-  - name: {{ .name }}
-    nodePort: {{ .nodePort }}
-    port: {{ .containerPort }}
-    targetPort: {{ .servicePort }}
+  - name: {{ $app.name }}
+    nodePort: {{ $app.nodePort }}
+    port: {{ $app.port }}
+    targetPort: {{ $app.containerPort }}
   selector:
-    app: {{ .name }}
+    app: {{ $app.name }}
  # sessionAffinity: None
   type: NodePort
 #status:

@@ -1,8 +1,14 @@
 apps:
   - name: jenkins-admin
-    containerPort: 8080
-    servicePort: 8080
-    nodePort: 31080
+    containerPort:
+       - 8080
+       - 5000
+    servicePort:
+       - 8080
+       - 5000
+    nodePort:
+       - 31080
+       - 31500
     image: jenkins/jenkins
     tag: lts-jdk21
     containerSecurityContext:
@@ -18,7 +24,7 @@ apps:
     volumeMounts:
       - name: jenkins-volume
         mountPath: /var/jenkins_home/
-           
+
 
   - name: nexus-admin
     containerPort: 8081
