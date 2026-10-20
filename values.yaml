@@ -2,10 +2,10 @@ apps:
   - name: jenkins-admin
     containerPort:
        - 8080
-       - 5000
+       - 50000
     servicePort:
        - 8080
-       - 5000
+       - 50000
     nodePort:
        - 31080
        - 31500
