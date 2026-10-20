@@ -29,7 +29,14 @@ spec:
         imagePullPolicy: IfNotPresent
         name: {{ $app.name }}
         ports:
-          - containerPort: {{ $app.port }}
+{{- if kindIs "slice" $app.containerPort }}
+{{- range $index, $port := $app.containerPort }}
+          - name: port-{{ $index }}
+            containerPort: {{ $port }}
+{{- end }}
+{{- else }}
+          - containerPort: {{ $app.containerPort }}
+{{- end }}
         resources:
           requests:
             cpu: {{ $.Values.resources.requests.cpu | quote }}

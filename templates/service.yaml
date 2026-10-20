@@ -19,10 +19,19 @@ spec:
   #- IPv4
   #ipFamilyPolicy: SingleStack
   ports:
+{{- if kindIs "slice" $app.containerPort }}
+{{- range $index, $containerPort := $app.containerPort }}
+  - name: port-{{ $index }}
+    nodePort: {{ index $app.nodePort $index }}
+    port: {{ index $app.servicePort $index }}
+    targetPort: {{ $containerPort }}
+{{- end }}
+{{- else }}
   - name: {{ $app.name }}
     nodePort: {{ $app.nodePort }}
-    port: {{ $app.port }}
+    port: {{ $app.servicePort }}
     targetPort: {{ $app.containerPort }}
+{{- end }}
   selector:
     app: {{ $app.name }}
  # sessionAffinity: None
