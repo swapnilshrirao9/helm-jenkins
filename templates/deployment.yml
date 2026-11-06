@@ -28,6 +28,10 @@ spec:
       - image: {{ $app.image }}:{{ $app.tag }}
         imagePullPolicy: IfNotPresent
         name: {{ $app.name }}
+        env:
+{{- range $env := $app.env }}
+          - name: {{ $env.name }}
+            value: {{ $env.value | quote }}
         ports:
 {{- if kindIs "slice" $app.containerPort }}
 {{- range $index, $port := $app.containerPort }}

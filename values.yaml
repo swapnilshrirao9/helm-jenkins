@@ -46,6 +46,9 @@ apps:
     nodePort: 31900
     image: 192.168.56.114:5000/swapnilsks/sonartest
     tag: latest
+    env:
+      - name: SONAR_SEARCH_JAVAADDITIONALOPTS
+        value: "-Xms512m -Xmx2g"
     containerSecurityContext:
       runAsNonRoot: true
       runAsUser: 1000
@@ -84,7 +87,7 @@ resources:
     memory: 1Gi
   limits:
     cpu: 3000m
-    memory: 7Gi
+    memory: 8Gi
 
 service:
   - protocol: TCP
