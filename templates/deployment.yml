@@ -29,9 +29,10 @@ spec:
         imagePullPolicy: IfNotPresent
         name: {{ $app.name }}
         env:
-{{- range $env := $app.env }}
+        {{- range $env := $app.env }}
           - name: {{ $env.name }}
             value: {{ $env.value | quote }}
+            {{- end }}
         ports:
 {{- if kindIs "slice" $app.containerPort }}
 {{- range $index, $port := $app.containerPort }}
