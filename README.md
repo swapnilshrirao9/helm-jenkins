@@ -1,4 +1,6 @@
-# Only for Testing Username Password jenkins:
+# TEST The tempate in local helm
+  helm template . --name-template jenkins --namespace jenkins --debug
+# Pasword jenkins
 admin
 admin
 
@@ -12,6 +14,7 @@ spec:
   project: default
 
   destination:
+
     namespace: jenkins
     server: https://kubernetes.default.svc
 
@@ -27,4 +30,10 @@ spec:
 
     syncOptions:
       - CreateNamespace=true
-  
+  # TEST The tempate in local helm
+  helm template . --name-template jenkins --namespace jenkins --debug
+
+  # Issue I encounter 
+   1) PVC PV  for sonar Its not Create for Sonar proper one pvc not work required 3 
+   2) Issue in the Environement in Sonarqube
+   3) Limmit to update request quta 8GB
