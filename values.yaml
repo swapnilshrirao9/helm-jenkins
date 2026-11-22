@@ -1,5 +1,6 @@
 apps:
   - name: jenkins-admin
+    kind: StatefulSet
     containerPort:
        - 8080
        - 50000
@@ -28,6 +29,7 @@ apps:
 
 
   - name: nexus-admin
+    kind: Deployment
     containerPort: 8081
     servicePort: 8081
     nodePort: 31081
@@ -43,6 +45,7 @@ apps:
         mountPath: /nexus-data
 
   - name: sonar-admin
+    kind: Deployment
     containerPort: 9000
     servicePort: 9000
     nodePort: 31900

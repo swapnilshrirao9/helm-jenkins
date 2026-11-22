@@ -1,6 +1,6 @@
 {{- range $app := .Values.apps }}
 apiVersion: apps/v1
-kind: Deployment
+kind: {{ $app.kind }}
 metadata:
   generation: 1
   labels:
