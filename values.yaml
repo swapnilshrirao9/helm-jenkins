@@ -12,7 +12,7 @@ apps:
        - 31500
     image: jenkins/jenkins
     tag: lts-jdk21
-    replicas: 2
+    replicas: 1
     containerSecurityContext:
       runAsNonRoot: true
       runAsUser: 1000
