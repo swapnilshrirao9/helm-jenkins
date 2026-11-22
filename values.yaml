@@ -11,6 +11,7 @@ apps:
        - 31500
     image: jenkins/jenkins
     tag: lts-jdk21
+    replicas: 2
     containerSecurityContext:
       runAsNonRoot: true
       runAsUser: 1000
@@ -32,6 +33,7 @@ apps:
     nodePort: 31081
     image: 192.168.56.114:5000/nexus
     tag: admin
+    replicas: 1
     volumes:
       - name: nexus-volume
         size: 2Gi
@@ -46,6 +48,7 @@ apps:
     nodePort: 31900
     image: 192.168.56.114:5000/swapnilsks/sonartest
     tag: latest
+    replicas: 1
     env:
       - name: SONAR_SEARCH_JAVAADDITIONALOPTS
         value: "-Xms512m -Xmx2g"
